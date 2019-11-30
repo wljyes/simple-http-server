@@ -2,14 +2,24 @@ package handler;
 
 import entity.RequestEntity;
 import entity.ResponseEntity;
+import servlet.Servlet;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ServletRequestHandler implements HttpRequestHandler {
+    private Map<String, String> servletNameMap = new HashMap<>();
+    private Map<String, Servlet> servletMap = new HashMap<>();
     @Override
     public boolean canHandle(String uri) {
         if (uri.contains(".")) {
             return false;
         }
         return true;
+    }
+
+    public ServletRequestHandler() {
+        //todo:xml文件解析，装配servletNameMap，懒加载servletMap
     }
 
     @Override

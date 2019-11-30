@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mappings>
+    <servlet-mapping>
+        <path>/hello</path>
+        <servlet>HelloServlet</servlet>
+    </servlet-mapping>
+</mappings>
+
