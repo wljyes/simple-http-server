@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-//todo: 提供将String转换为ResponseEntity的方法（maybe工厂模式）
 public class ResponseEntity {
     private String httpVersion;
     private String statusCode;
@@ -13,18 +12,26 @@ public class ResponseEntity {
     private Headers headers = new Headers();
     private String responseBody;
 
+    public ResponseEntity() {}
+
+    /**
+     * 拷贝构造器
+     * @param prototype 要拷贝的原型
+     */
+    public ResponseEntity(ResponseEntity prototype) {
+        this.httpVersion = prototype.getHttpVersion();
+        this.statusCode = prototype.statusCode;
+        this.reasonPhrase = prototype.reasonPhrase;
+        this.responseBody = prototype.responseBody;
+        this.headers.putAll(prototype.headers);
+    }
+
     @Override
     public String toString() {
         return httpVersion + " " + statusCode + " " + reasonPhrase + "\n" +
                 headers.toString() +
                 "\n" +
                 responseBody;
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        //todo: implement clone() method
-        return super.clone();
     }
 
     public String getHttpVersion() {

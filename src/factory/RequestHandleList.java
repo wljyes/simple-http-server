@@ -9,6 +9,7 @@ import util.ConfigUtils;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -45,7 +46,7 @@ public class RequestHandleList {
             @Override
             public ResponseEntity handle(RequestEntity requestEntity) {
                 //todo: handle error
-                return null;
+                return ResponseEntityFactory.responseEntity_404(Calendar.getInstance());
             }
         });
     }

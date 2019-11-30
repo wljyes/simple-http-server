@@ -23,14 +23,17 @@ public class StaticResourceRequestHandler implements HttpRequestHandler {
         String path = requestEntity.getUri();
         path = "E:/http/static/" + path;
 
+        //如果请求的问html
+        File file = new File(path);
+        if (!file.exists()) { //文件不存在返回404
+            return ResponseEntityFactory.responseEntity_404(Calendar.getInstance());
+        } else if (file.isDirectory()) { //文件为目录返回403
+            return ResponseEntityFactory.responseEntity_403(Calendar.getInstance());
+        }
+
         if (path.endsWith(".html") || path.endsWith(".htm")) {
-            File file = new File(path);
-            if (!file.exists()) {
-                return ResponseEntityFactory.responseEntity_404(Calendar.getInstance());
-            } else if (file.isDirectory()) {
-                return ResponseEntityFactory.responseEntity_403(Calendar.getInstance());
-            }
             StringBuilder sb = new StringBuilder();
+            //读取文件
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -39,6 +42,7 @@ public class StaticResourceRequestHandler implements HttpRequestHandler {
             } catch (IOException e) {
                 // ... handle IO exception
             }
+            //返回资源
             return ResponseEntityFactory.responseEntityBuilder_200()
                     .date(Calendar.getInstance()).contentLength(sb.length())
                     .contentType("text/html").body(sb.toString()).build();
@@ -47,6 +51,6 @@ public class StaticResourceRequestHandler implements HttpRequestHandler {
             //todo: 图片处理
 
         }
-        return null;
+        return ResponseEntityFactory.responseEntity_403(Calendar.getInstance());
     }
 }
