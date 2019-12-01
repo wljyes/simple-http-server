@@ -20,6 +20,13 @@ public class ConfigUtils {
         return prop.getProperty(key);
     }
 
+    //重载，不要直接修改原接口
+    public static String getPropertyValue(String key, String fileName, String defaultValue) throws IOException {
+        Properties prop = getProperties(fileName);
+
+        return prop.getProperty(key, defaultValue);
+    }
+
     public static Properties getProperties(String fileName) throws FileNotFoundException {
         Properties prop = new Properties();
         try (InputStream in = ConfigUtils.class.getClassLoader().getResourceAsStream(fileName)) {

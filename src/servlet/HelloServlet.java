@@ -1,11 +1,13 @@
 package servlet;
 
+import annotation.RequestMapping;
 import entity.RequestEntity;
 import entity.ResponseEntity;
 import factory.ResponseEntityFactory;
 
 import java.util.Calendar;
 
+@RequestMapping(uri = "/hello")
 public class HelloServlet extends Servlet {
     @Override
     public ResponseEntity doPost(RequestEntity requestEntity) {

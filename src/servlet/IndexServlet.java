@@ -1,5 +1,6 @@
 package servlet;
 
+import annotation.RequestMapping;
 import entity.RequestEntity;
 import entity.ResponseEntity;
 import factory.ResponseEntityBuilder;
@@ -7,6 +8,7 @@ import factory.ResponseEntityFactory;
 
 import java.util.Calendar;
 
+@RequestMapping(uri = "/")
 public class IndexServlet extends Servlet {
     @Override
     public ResponseEntity doGet(RequestEntity requestEntity) {

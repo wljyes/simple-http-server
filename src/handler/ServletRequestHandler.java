@@ -1,12 +1,19 @@
 package handler;
 
+import annotation.RequestMapping;
 import entity.RequestEntity;
 import entity.ResponseEntity;
 import factory.ResponseEntityFactory;
 import org.dom4j.DocumentException;
 import servlet.Servlet;
 import util.ConfigUtils;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,10 +27,71 @@ public class ServletRequestHandler implements HttpRequestHandler {
 
     public ServletRequestHandler() {
         try {
+            boolean enableAnnotation = Boolean
+                    .parseBoolean(ConfigUtils.getPropertyValue("enableAnnotationMapping", "http-server.properties", "false"));
+            if (enableAnnotation) { //注解驱动路由,启动时加载
+                loadRoutesFromAnnotation();
+            } else {
+                loadRoutesFromXML(); //xml配置驱动路由，懒加载servlet实例
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadRoutesFromXML() {
+        try {
             servletNameMap.putAll(ConfigUtils.getServletMapFromXML("servlet-config.xml"));
         } catch (DocumentException e) {
             System.out.println("解析servlet-config配置文件出错");
             e.printStackTrace();
+        }
+    }
+
+    private void loadRoutesFromAnnotation() {
+        try {
+            String scanPackage = ConfigUtils.getPropertyValue("scanPackage", "http-server.properties");
+            if (scanPackage != null) {
+                Enumeration<URL> enumeration = Thread.currentThread().getContextClassLoader().getResources(scanPackage.replaceAll("\\.", "/"));
+                while (enumeration.hasMoreElements()) {
+                    URL resource = enumeration.nextElement();
+                    String protocol = resource.getProtocol();
+                    if (protocol.equalsIgnoreCase("file")) {
+                        loadRoutesFromAnnotation(scanPackage, resource.getPath());
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadRoutesFromAnnotation(String packageName, String packagePath) {
+        File[] files = new File(packagePath).listFiles(file -> file.isDirectory() || file.getName().endsWith(".class"));
+        if (files != null) {
+            for (File file : files) {
+                String filename = file.getName();
+                if (file.isDirectory()) {
+                    packageName = packageName + "." + filename;
+                    packagePath = packagePath + "/" + filename;
+                    loadRoutesFromAnnotation(packageName, packagePath);
+                } else {
+                    filename = packageName + "." + filename.substring(0, filename.lastIndexOf("."));
+                    try {
+                        Class<?> aClass = Class.forName(filename);
+                        if (Servlet.class.isAssignableFrom(aClass) && !Servlet.class.equals(aClass)) {
+                            RequestMapping requestMapping = aClass.getAnnotation(RequestMapping.class);
+                            if (requestMapping != null) {
+                                String uri = requestMapping.uri();
+                                servletNameMap.put(uri, aClass.getSimpleName());
+                                servletMap.put(aClass.getSimpleName(), (Servlet) aClass.newInstance());
+                            }
+                        }
+                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     }
 
