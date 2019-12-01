@@ -10,5 +10,6 @@
 * xml配置uri->Servlet映射关系（自己仿制的Servlet接口）
 * request和response的Java模型封装  
 * 将请求转发给对应servlet，根据请求方法调用对应的doGet或doPost，返回resopnse
+* 实现了对Servlet类的注解RequestMapping，在类上配置路由
 ---
 大冬天敲代码太难受了。。
