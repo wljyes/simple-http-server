@@ -1,6 +1,5 @@
 package util;
 
-import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -16,6 +15,9 @@ public class StringUtils {
     }
 
     public static String getUriFromRequestUri(String requestUri) {
+        if (requestUri.length() == 1 && requestUri.equals("/")) {
+            return "";
+        }
         int index = requestUri.indexOf('?');
         if (index == -1) {
             return requestUri.substring(1);

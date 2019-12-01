@@ -40,8 +40,10 @@ public class RequestEntityFactory {
             entity.setProtocolVersion(headLine[2]); //http协议版本
             //根据请求方法获取不同地方的请求参数
             if (GET.toString().equals(headLine[0])) {
+                entity.setRequestMethod(GET);
                 entity.setParameters(StringUtils.getParamsFromRequestUri(headLine[1]));
             } else if (POST.toString().equals(headLine[0])) {
+                entity.setRequestMethod(POST);
                 entity.setParameters(StringUtils.getParamsFromRequestBody(reader.readLine()));
             } else {
                 throw new UnSupportRequestMethodException(headLine[0]);

@@ -1,8 +1,16 @@
 package util;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 public class ConfigUtils {
@@ -25,5 +33,22 @@ public class ConfigUtils {
         }
 
         return prop;
+    }
+
+    public static Map<String, String> getServletMapFromXML(String fileName) throws DocumentException {
+        SAXReader reader = new SAXReader();
+        InputStream in;
+        Document document = reader.read(ConfigUtils.class.getClassLoader().getResourceAsStream(fileName));
+        Element root = document.getRootElement(); //进行DOM操作
+
+        Map<String, String> map = new HashMap<>(); //装载path-servletName映射
+
+        for (Iterator<Element> mappings = root.elementIterator("servlet-mapping"); mappings.hasNext();) {
+            Element mapping = mappings.next(); //servlet-mapping节点
+            //查找path和servlet-name节点，取值
+            map.put(mapping.element("path").getTextTrim(), mapping.element("servlet-name").getTextTrim());
+        }
+
+        return map;
     }
 }

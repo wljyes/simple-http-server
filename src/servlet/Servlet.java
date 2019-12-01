@@ -2,16 +2,26 @@ package servlet;
 
 import entity.RequestEntity;
 import entity.ResponseEntity;
+import factory.ResponseEntityFactory;
+
+import java.util.Calendar;
 
 public abstract class Servlet {
-    public void service(RequestEntity requestEntity, ResponseEntity responseEntity) {
+    public ResponseEntity service(RequestEntity requestEntity) {
         switch (requestEntity.getRequestMethod()) {
-            case GET: doGet(requestEntity, responseEntity); break;
-            case POST: doPost(requestEntity, responseEntity); break;
+            case GET: return doGet(requestEntity);
+            case POST: return doPost(requestEntity);
         }
+        return ResponseEntityFactory.responseEntity_404(Calendar.getInstance()); //请求方法无效，返回404
     }
 
-    public abstract void doGet(RequestEntity requestEntity, ResponseEntity responseEntity);
+    public Servlet() {}
 
-    public abstract void doPost(RequestEntity requestEntity, ResponseEntity responseEntity);
+    public ResponseEntity doGet(RequestEntity requestEntity) {
+        return ResponseEntityFactory.responseEntity_405(Calendar.getInstance());
+    }
+
+    public ResponseEntity doPost(RequestEntity requestEntity) {
+        return ResponseEntityFactory.responseEntity_405(Calendar.getInstance());
+    }
 }
