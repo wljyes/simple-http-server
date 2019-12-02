@@ -7,18 +7,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 //Server打开后需要手动关闭
-public class SocketBasedServer implements Runnable {
+public class EasySocketServer implements Runnable {
     private int port = 8080;
     private ServerSocket socket;
-    private ExecutorService executorService;
 
-    public SocketBasedServer(int port) {
+    public EasySocketServer(int port) {
         this.port = port;
     }
 
     public void run() {
         openServerSocket();
-        executorService = Executors.newCachedThreadPool();
+        ExecutorService executorService = Executors.newCachedThreadPool();
         while (true) {
             try {
                 Socket client = socket.accept();
@@ -64,7 +63,7 @@ public class SocketBasedServer implements Runnable {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         //因为accept会阻塞，所以server必须放在单独一个线程中
-        SocketBasedServer server = new SocketBasedServer(9000);
+        EasySocketServer server = new EasySocketServer(9000);
         executorService.submit(server);
 
         List<Thread> threads = new ArrayList<>();

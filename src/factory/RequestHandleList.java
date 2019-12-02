@@ -62,7 +62,7 @@ public class RequestHandleList {
         }
         requestHandleList = new RequestHandleList();
 
-        return null;
+        return requestHandleList;
     }
 
     public ResponseEntity handleRequest(RequestEntity entity) {

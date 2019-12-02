@@ -28,6 +28,12 @@ public class ResponseEntityFactory {
             .httpVersion(HTTP_VERSION).status("405", "Method Not Allowed").contentLength(LENGTH_405)
             .contentType("text/html").body(CONTENT_405).build();
 
+    public static ResponseEntity responseEntity(ResponseEntity prototype) {
+        ResponseEntity responseEntity = new ResponseEntity(prototype);
+        responseEntity.getHeaders().put("Date", StringUtils.getHttpFormatDate(Calendar.getInstance()));
+        return responseEntity;
+    }
+
     public static ResponseEntity responseEntity_403(Calendar calendar) {
         ResponseEntity responseEntity = new ResponseEntity(ENTITY_403_PROTOTYPE);
         responseEntity.getHeaders().put("Date", StringUtils.getHttpFormatDate(calendar));
