@@ -5,7 +5,6 @@ import util.StringUtils;
 
 import java.util.Calendar;
 
-//todo:建立一个表，根据响应码返回response通用方法
 public class ResponseEntityFactory {
     public static String HTTP_VERSION = "HTTP/1.1";
 
