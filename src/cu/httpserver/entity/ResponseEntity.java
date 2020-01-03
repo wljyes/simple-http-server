@@ -1,4 +1,6 @@
-package entity;
+package cu.httpserver.entity;
+
+import cu.httpserver.factory.ResponseEntityBuilder;
 
 import java.util.Collection;
 import java.util.HashMap;

@@ -1,10 +1,10 @@
-package util;
+package cu.httpserver.util;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,10 +50,10 @@ public class ConfigUtils {
 
         Map<String, String> map = new HashMap<>(); //装载path-servletName映射
 
-        for (Iterator<Element> mappings = root.elementIterator("servlet-mapping"); mappings.hasNext();) {
-            Element mapping = mappings.next(); //servlet-mapping节点
+        for (Iterator<Element> mappings = root.elementIterator("cu.httpserver.servlet-mapping"); mappings.hasNext();) {
+            Element mapping = mappings.next(); //cu.httpserver.servlet-mapping节点
             //查找path和servlet-name节点，取值
-            map.put(mapping.element("path").getTextTrim(), mapping.element("servlet-name").getTextTrim());
+            map.put(mapping.element("path").getTextTrim(), mapping.element("cu.httpserver.servlet-name").getTextTrim());
         }
 
         return map;

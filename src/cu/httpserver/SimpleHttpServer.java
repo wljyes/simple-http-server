@@ -1,15 +1,13 @@
-import entity.RequestEntity;
-import entity.ResponseEntity;
-import factory.RequestEntityFactory;
-import factory.RequestHandleList;
-import handler.HttpRequestHandler;
-import util.StringUtils;
+package cu.httpserver;
+
+import cu.httpserver.entity.RequestEntity;
+import cu.httpserver.entity.ResponseEntity;
+import cu.httpserver.factory.RequestEntityFactory;
+import cu.httpserver.factory.RequestHandleList;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

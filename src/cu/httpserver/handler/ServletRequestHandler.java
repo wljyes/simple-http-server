@@ -1,15 +1,14 @@
-package handler;
+package cu.httpserver.handler;
 
-import annotation.RequestMapping;
-import entity.RequestEntity;
-import entity.ResponseEntity;
-import factory.ResponseEntityFactory;
+import cu.httpserver.annotation.RequestMapping;
+import cu.httpserver.entity.RequestEntity;
+import cu.httpserver.entity.ResponseEntity;
+import cu.httpserver.factory.ResponseEntityFactory;
 import org.dom4j.DocumentException;
-import servlet.Servlet;
-import util.ConfigUtils;
+import cu.httpserver.servlet.Servlet;
+import cu.httpserver.util.ConfigUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
@@ -18,8 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ServletRequestHandler implements HttpRequestHandler {
-    private Map<String, String> servletNameMap = new HashMap<>(); // path -> servlet-name
-    private Map<String, Servlet> servletMap = new HashMap<>(); //servlet-name -> servlet
+    private Map<String, String> servletNameMap = new HashMap<>(); // path -> cu.httpserver.servlet-name
+    private Map<String, Servlet> servletMap = new HashMap<>(); //cu.httpserver.servlet-name -> cu.httpserver.servlet
     @Override
     public boolean canHandle(String uri) {
         return servletNameMap.containsKey("/" + uri);

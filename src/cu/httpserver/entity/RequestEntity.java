@@ -1,4 +1,4 @@
-package entity;
+package cu.httpserver.entity;
 
 import java.util.HashMap;
 import java.util.Map;

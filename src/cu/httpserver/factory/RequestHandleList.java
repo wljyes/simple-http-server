@@ -1,14 +1,13 @@
-package factory;
+package cu.httpserver.factory;
 
-import entity.RequestEntity;
-import entity.ResponseEntity;
-import handler.HttpRequestHandler;
-import handler.ServletRequestHandler;
-import handler.StaticResourceRequestHandler;
-import util.ConfigUtils;
+import cu.httpserver.entity.RequestEntity;
+import cu.httpserver.entity.ResponseEntity;
+import cu.httpserver.handler.HttpRequestHandler;
+import cu.httpserver.handler.ServletRequestHandler;
+import cu.httpserver.handler.StaticResourceRequestHandler;
+import cu.httpserver.util.ConfigUtils;
 
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;

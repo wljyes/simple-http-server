@@ -3,11 +3,11 @@
 <mappings>
     <servlet-mapping>
         <path>/</path>
-        <servlet-name>servlet.IndexServlet</servlet-name>
+        <servlet-name>cu.httpserver.servlet.IndexServlet</servlet-name>
     </servlet-mapping>
     <servlet-mapping>
         <path>/hello</path>
-        <servlet-name>servlet.HelloServlet</servlet-name>
+        <servlet-name>cu.httpserver.servlet.HelloServlet</servlet-name>
     </servlet-mapping>
 </mappings>
 

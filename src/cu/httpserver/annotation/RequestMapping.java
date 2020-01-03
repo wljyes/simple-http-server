@@ -1,4 +1,4 @@
-package annotation;
+package cu.httpserver.annotation;
 
 import java.lang.annotation.*;
 

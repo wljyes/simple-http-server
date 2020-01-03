@@ -1,4 +1,4 @@
-package exception;
+package cu.httpserver.exception;
 
 public class UnSupportRequestMethodException extends HttpRequestParseException {
     public UnSupportRequestMethodException(String message) {

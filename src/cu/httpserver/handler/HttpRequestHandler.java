@@ -1,7 +1,7 @@
-package handler;
+package cu.httpserver.handler;
 
-import entity.RequestEntity;
-import entity.ResponseEntity;
+import cu.httpserver.entity.RequestEntity;
+import cu.httpserver.entity.ResponseEntity;
 
 /**
  * 用于解耦服务器请求的接收与处理

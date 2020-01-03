@@ -1,9 +1,9 @@
-package handler;
+package cu.httpserver.handler;
 
-import entity.RequestEntity;
-import entity.ResponseEntity;
-import factory.ResponseEntityBuilder;
-import factory.ResponseEntityFactory;
+import cu.httpserver.entity.RequestEntity;
+import cu.httpserver.entity.ResponseEntity;
+import cu.httpserver.factory.ResponseEntityBuilder;
+import cu.httpserver.factory.ResponseEntityFactory;
 
 import java.io.*;
 import java.util.Calendar;
@@ -40,7 +40,7 @@ public class StaticResourceRequestHandler implements HttpRequestHandler {
                     sb.append(line);
                 }
             } catch (IOException e) {
-                // ... handle IO exception
+                // ... handle IO cu.httpserver.exception
             }
             //返回资源
             return ResponseEntityFactory.responseEntityBuilder_200()

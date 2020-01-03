@@ -1,18 +1,17 @@
-package factory;
+package cu.httpserver.factory;
 
-import entity.RequestEntity;
-import exception.HttpRequestParseException;
-import entity.RequestEntity.Headers;
-import exception.UnSupportRequestMethodException;
-import util.StringUtils;
+import cu.httpserver.entity.RequestEntity;
+import cu.httpserver.exception.HttpRequestParseException;
+import cu.httpserver.entity.RequestEntity.Headers;
+import cu.httpserver.exception.UnSupportRequestMethodException;
+import cu.httpserver.util.StringUtils;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.StringReader;
 import java.net.URLDecoder;
 import java.util.Arrays;
 
-import static entity.HttpRequestMethod.*;
+import static cu.httpserver.entity.HttpRequestMethod.*;
 
 public class RequestEntityFactory {
     public static RequestEntity getEntity(String requestMessage)  {

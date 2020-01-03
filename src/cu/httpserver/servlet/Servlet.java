@@ -1,8 +1,8 @@
-package servlet;
+package cu.httpserver.servlet;
 
-import entity.RequestEntity;
-import entity.ResponseEntity;
-import factory.ResponseEntityFactory;
+import cu.httpserver.entity.RequestEntity;
+import cu.httpserver.entity.ResponseEntity;
+import cu.httpserver.factory.ResponseEntityFactory;
 
 import java.util.Calendar;
 

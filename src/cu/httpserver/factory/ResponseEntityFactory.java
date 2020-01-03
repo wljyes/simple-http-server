@@ -1,7 +1,7 @@
-package factory;
+package cu.httpserver.factory;
 
-import entity.ResponseEntity;
-import util.StringUtils;
+import cu.httpserver.entity.ResponseEntity;
+import cu.httpserver.util.StringUtils;
 
 import java.util.Calendar;
 

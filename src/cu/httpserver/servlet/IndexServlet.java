@@ -1,10 +1,9 @@
-package servlet;
+package cu.httpserver.servlet;
 
-import annotation.RequestMapping;
-import entity.RequestEntity;
-import entity.ResponseEntity;
-import factory.ResponseEntityBuilder;
-import factory.ResponseEntityFactory;
+import cu.httpserver.annotation.RequestMapping;
+import cu.httpserver.entity.RequestEntity;
+import cu.httpserver.entity.ResponseEntity;
+import cu.httpserver.factory.ResponseEntityFactory;
 
 import java.util.Calendar;
 
